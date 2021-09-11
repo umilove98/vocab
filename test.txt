@@ -1,2 +1,3 @@
 hello world
 push door
+bye world
