@@ -12,12 +12,12 @@ const buttonStyle = css`
   color: white;
   outline: none;
   cursor: pointer;
+  text-decoration: none;
 
   background: ${palette.gray[8]};
-  &hover {
+  &:hover {
     background: ${palette.gray[6]};
   }
-
   ${(props) =>
     props.fullWidth &&
     css`
