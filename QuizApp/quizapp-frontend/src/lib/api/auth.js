@@ -13,3 +13,6 @@ export const check = () => client.get('/api/auth/check');
 
 //로그아웃
 export const logout = () => client.post('/api/auth/logout');
+
+//회원탈퇴
+export const signout = (id) => client.delete(`/api/auth/${id}`);

@@ -1,4 +1,5 @@
 import Joi from '@hapi/joi';
+import auth from 'registry-auth-token';
 import User from '../../models/user';
 
 /*
@@ -12,7 +13,7 @@ export const register = async (ctx) => {
   // Request Body 검증하기
   const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(20).required(),
-    password: Joi.string().required(),
+    password: Joi.string().min(6).required(),
   });
   const result = schema.validate(ctx.request.body);
   if (result.error) {
@@ -102,4 +103,39 @@ export const check = async (ctx) => {
 export const logout = async (ctx) => {
   ctx.cookies.set('access_token');
   ctx.status = 204; // No Content
+};
+
+/*
+  DELETE /api/auth/:id
+*/
+export const signout = async (ctx) => {
+  const { id } = ctx.params;
+  try {
+    await User.findByIdAndRemove(id).exec();
+    ctx.cookies.set('access_token');
+    ctx.status = 204; // No Content
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};
+
+/*
+  PATCH /api/user/:id
+*/
+export const update = (ctx) => {
+  const { id } = ctx.params;
+
+  const index = auth.findIndex((p) => p.id.toString() === id);
+  if (index === -1) {
+    ctx.status = 404;
+    ctx.body = {
+      message: '회원 정보가 존재하지 않습니다.',
+    };
+  }
+
+  auth[index] = {
+    ...auth[index],
+    ...ctx.request.body,
+  };
+  ctx.body = auth[index];
 };

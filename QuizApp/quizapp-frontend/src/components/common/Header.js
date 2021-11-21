@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
@@ -53,10 +52,12 @@ const Header = ({ user, onLogout }) => {
             QuizApp
           </Link>
           {user ? (
-            <div className="right">
-              <UserInfo>{user.username}</UserInfo>
-              <Button onClick={onLogout}>로그아웃</Button>
-            </div>
+            <>
+              <div className="right">
+                <UserInfo>{user.username}</UserInfo>
+                <Button onClick={onLogout}>로그아웃</Button>
+              </div>
+            </>
           ) : (
             <div className="right">
               <Button to="/login">로그인</Button>
