@@ -3,6 +3,7 @@ import Responsive from './Responsive';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 
+
 const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
@@ -56,6 +57,7 @@ const Header = ({ user, onLogout }) => {
               <div className="right">
                 <UserInfo>{user.username}</UserInfo>
                 <Button onClick={onLogout}>로그아웃</Button>
+                <Button to="/profileEdit">회원정보 수정</Button>
               </div>
             </>
           ) : (

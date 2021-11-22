@@ -10,6 +10,7 @@ function App() {
       <Route path="/" component={ListPage} exact />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
+      <Route path="/profileEdit" component={ProfileEditPage} />
     </>
   );
 }
