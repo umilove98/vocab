@@ -1,9 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
-import AskSignoutModal from './AskSignoutModal';
 
 const AuthFormBlock = styled.div`
   h3 {
@@ -55,18 +53,7 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-const PEditForm = ({ form, onChange, onSubmit, error, onSignout }) => {
-  const [modal, setModal] = useState(false);
-  const onSignoutClick = () => {
-    setModal(true);
-  };
-  const onCancel = () => {
-    setModal(false);
-  };
-  const onConfirm = () => {
-    setModal(false);
-    onSignout();
-  };
+const PEditForm = ({ form, onChange, onSubmit, error, actionButtons }) => {
   return (
     <AuthFormBlock>
       <h3>회원정보 수정</h3>
@@ -92,16 +79,12 @@ const PEditForm = ({ form, onChange, onSubmit, error, onSignout }) => {
           회원정보 수정
         </ButtonWithMarginTop>
       </form>
-      <Footer>
-        <Button onClick={onSignoutClick}>회원탈퇴</Button>
-        <AskSignoutModal
-          visible={modal}
-          onConfirm={onConfirm}
-          onCancel={onCancel}
-        />
-      </Footer>
+      <Footer>{actionButtons}</Footer>
     </AuthFormBlock>
   );
 };
 
 export default PEditForm;
+/*
+
+*/

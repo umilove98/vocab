@@ -15,7 +15,7 @@ const Fullscreen = styled.div`
 `;
 
 const AskModalBlock = styled.div`
-  width: 320px;
+  width: 190px;
   background: white;
   padding: 1.5rem;
   border-radius: 4px;

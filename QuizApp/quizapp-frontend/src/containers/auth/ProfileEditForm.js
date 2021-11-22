@@ -4,6 +4,8 @@ import { changeField, initializeForm, register } from '../../modules/auth';
 import PEditForm from '../../components/auth/PEditForm';
 import { check } from '../../modules/user';
 import { withRouter } from 'react-router-dom';
+import AuthActionButtons from '../../components/auth/AuthActionButtons';
+import { signout } from '../../lib/api/auth';
 
 const ProfileEditForm = ({ history }) => {
   const [error, setError] = useState(null);
@@ -14,6 +16,16 @@ const ProfileEditForm = ({ history }) => {
     authError: auth.authError,
     user: user.user,
   }));
+
+  const onSignout = async () => {
+    try {
+      await signout(user._id);
+      history.push('/login');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   //인풋 변경 이벤트 핸들러
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -78,6 +90,7 @@ const ProfileEditForm = ({ history }) => {
       onChange={onChange}
       onSubmit={onSubmit}
       error={error}
+      actionButtons={<AuthActionButtons onSignout={onSignout} />}
     />
   );
 };
