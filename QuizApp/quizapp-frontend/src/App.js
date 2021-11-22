@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ListPage from './pages/ListPage';
+import ProfileEditPage from './pages/ProfileEditPage';
 
 function App() {
   return (

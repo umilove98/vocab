@@ -22,7 +22,7 @@ const AskModalBlock = styled.div`
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.125);
   h2 {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margint-bottom: 1rem;
   }
   p {
     margin-bottom: 3rem;

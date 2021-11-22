@@ -3,7 +3,6 @@ import Responsive from './Responsive';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 
-
 const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
@@ -21,7 +20,7 @@ const Wrapper = styled(Responsive)`
   justify-content: space-between;
   .logo {
     font-size: 1.125rem;
-    color: blue;
+    color: white;
     font-weight: 800;
     letter-spacing: 2px;
     text-decoration: none;
