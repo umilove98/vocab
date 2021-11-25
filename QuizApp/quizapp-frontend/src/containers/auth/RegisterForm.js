@@ -66,6 +66,7 @@ const RegisterForm = ({ history }) => {
     }
     if (auth) {
       console.log('회원가입 성공');
+      window.alert('환영합니다.');
       console.log(auth);
       dispatch(check());
     }

@@ -120,22 +120,34 @@ export const signout = async (ctx) => {
 };
 
 /*
-  PATCH /api/user/:id
+  PATCH /api/auth/:id
 */
-export const update = (ctx) => {
-  const { id } = ctx.params;
-
-  const index = auth.findIndex((p) => p.id.toString() === id);
-  if (index === -1) {
-    ctx.status = 404;
-    ctx.body = {
-      message: '회원 정보가 존재하지 않습니다.',
-    };
+export const update = async (ctx) => {
+  const schema = Joi.object().keys({
+    password: Joi.string().min(6).required(),
+  });
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    ctx.status = 400;
+    ctx.body = result.error;
+    return;
   }
 
-  auth[index] = {
-    ...auth[index],
-    ...ctx.request.body,
-  };
-  ctx.body = auth[index];
+  const { id } = ctx.params;
+  const { password } = ctx.request.body;
+  try {
+    const user = await User.findById(id);
+    await user.setPassword(password);
+    await user.save();
+    await User.findByIdAndUpdate(id, ctx.request.body, {
+      new: true,
+    }).exec();
+    if (!user) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.body = user;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 };

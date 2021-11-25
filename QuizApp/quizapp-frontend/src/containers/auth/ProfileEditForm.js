@@ -6,6 +6,7 @@ import { check } from '../../modules/user';
 import { withRouter } from 'react-router-dom';
 import AuthActionButtons from '../../components/auth/AuthActionButtons';
 import { signout } from '../../lib/api/auth';
+import { update } from '../../lib/api/auth';
 
 const ProfileEditForm = ({ history }) => {
   const [error, setError] = useState(null);
@@ -21,6 +22,7 @@ const ProfileEditForm = ({ history }) => {
     try {
       await signout(user._id);
       history.push('/login');
+      window.alert('탈퇴처리되었습니다');
     } catch (e) {
       console.log(e);
     }
@@ -39,24 +41,28 @@ const ProfileEditForm = ({ history }) => {
   };
 
   //폼 등록 이벤트 핸들러
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const { username, password, passwordConfirm } = form;
+    const { password, passwordConfirm } = form;
     // 하나라도 비어 있다면
-    if ([username, password, passwordConfirm].includes('')) {
+    if ([password, passwordConfirm].includes('')) {
       setError('빈 칸을 모두 입력하세요');
       return;
     }
     // 비밀번호가 일치하지 않는다면
     if (password !== passwordConfirm) {
       setError('비밀번호가 일치하지 않습니다.');
-      dispatch(changeField({ form: 'register', key: 'password', value: '' }));
-      dispatch(
-        changeField({ form: 'register', key: 'passwordConfirm', value: '' }),
-      );
       return;
     }
-    dispatch(register({ username, password }));
+    try {
+      const id = user._id;
+      await update({ id, password });
+      history.push('/login');
+      window.alert('수정되었습니다.');
+    } catch (e) {
+      console.log(e);
+    }
+    //dispatch(update({ password }));
   };
 
   //컴포넌트가 처음 랜더링될 때 form 을 초기화
@@ -64,28 +70,9 @@ const ProfileEditForm = ({ history }) => {
     dispatch(initializeForm('register'));
   }, [dispatch]);
 
-  //회원가입 성공/실패 처리
-  useEffect(() => {
-    if (authError) {
-      // 계정명이 이미 존재할 때
-      if (authError.response.status === 409) {
-        setError('이미 존재하는 계정명입니다.');
-        return;
-      }
-      // 기타 이유
-      setError('회원가입 실패');
-      return;
-    }
-    if (auth) {
-      console.log('회원가입 성공');
-      console.log(auth);
-      dispatch(check());
-    }
-  }, [auth, authError, dispatch]);
-
   return (
     <PEditForm
-      type="profileEdit"
+      type="register"
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}

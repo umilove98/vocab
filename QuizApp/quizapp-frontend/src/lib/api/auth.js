@@ -16,3 +16,7 @@ export const logout = () => client.post('/api/auth/logout');
 
 //회원탈퇴
 export const signout = (id) => client.delete(`/api/auth/${id}`);
+
+//회원정보 수정
+export const update = ({ id, password }) =>
+  client.patch(`/api/auth/${id}`, { password });
