@@ -91,7 +91,7 @@ export const list = async (ctx) => {
 };
 
 /*
-    GET /api/vocabs/:id
+  GET /api/posts/:id
 */
 export const read = async (ctx) => {
   ctx.body = ctx.state.vocab;

@@ -49,7 +49,7 @@ const RegisterForm = ({ history }) => {
 
   //컴포넌트가 처음 랜더링될 때 form 을 초기화
   useEffect(() => {
-    dispatch(initializeForm('register'));
+    return () => dispatch(initializeForm('register'));
   }, [dispatch]);
 
   //회원가입 성공/실패 처리

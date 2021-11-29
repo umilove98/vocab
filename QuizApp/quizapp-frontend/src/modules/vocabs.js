@@ -6,7 +6,7 @@ import * as vocabsAPI from '../lib/api/vocabs';
 import { takeLatest } from 'redux-saga/effects';
 
 const [LIST_VOCABS, LIST_VOCABS_SUCCESS, LIST_VOCABS_FAILURE] =
-  createRequestActionTypes('vocabs/LIST_VOCABS');
+  createRequestActionTypes('posts/LIST_VOCABS');
 
 export const listVocabs = createAction(
   LIST_VOCABS,
@@ -19,15 +19,17 @@ export function* vocabsSaga() {
 }
 
 const initialState = {
-  vocabs: null,
+  posts: null,
   error: null,
+  lastPage: 1,
 };
 
 const vocabs = handleActions(
   {
-    [LIST_VOCABS_SUCCESS]: (state, { payload: vocabs }) => ({
+    [LIST_VOCABS_SUCCESS]: (state, { payload: vocabs, meta: response }) => ({
       ...state,
       vocabs,
+      lastPage: parseInt(response.headers['last-page'], 10), // 문자열을 숫자로 변환
     }),
     [LIST_VOCABS_FAILURE]: (state, { payload: error }) => ({
       ...state,

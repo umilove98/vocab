@@ -35,7 +35,7 @@ const LoginForm = ({ history }) => {
 
   //컴포넌트가 처음 랜더링될 때 form 을 초기화
   useEffect(() => {
-    dispatch(initializeForm('login'));
+    return () => dispatch(initializeForm('login'));
   }, [dispatch]);
 
   useEffect(() => {
