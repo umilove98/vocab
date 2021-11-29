@@ -24,7 +24,7 @@ const VocabContent = styled.div`
   color: ${palette.gray[8]};
 `;
 
-const VocabViewer = ({ vocab, error, loading }) => {
+const VocabViewer = ({ vocab, error, loading, actionButtons }) => {
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -50,6 +50,7 @@ const VocabViewer = ({ vocab, error, loading }) => {
         />
         <Tags tags={tags} />
       </VocabHead>
+      {actionButtons}
     </VocabViewerBlock>
   );
 };

@@ -11,3 +11,5 @@ export const listVocabs = ({ page, username, tag }) => {
   });
   return client.get(`/api/vocabs?${queryString}`);
 };
+
+export const removeVocab = (id) => client.delete(`/api/vocabs/${id}`);
