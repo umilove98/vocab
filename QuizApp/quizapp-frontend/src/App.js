@@ -8,7 +8,8 @@ import ProfileEditPage from './pages/ProfileEditPage';
 function App() {
   return (
     <>
-      <Route path="/" component={ListPage} exact />
+      <Route path="/" component={LoginPage} exact />
+      <Route path="/@:username" component={ListPage} exact />
       <Route path="/login" component={LoginPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/profileEdit" component={ProfileEditPage} />

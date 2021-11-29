@@ -5,7 +5,6 @@ const { Schema } = mongoose;
 const VocabSchema = new Schema({
   title: String,
   explanation: String,
-  creater: String,
   words: [
     {
       word: String,
@@ -16,6 +15,10 @@ const VocabSchema = new Schema({
   publishedDate: {
     type: Date,
     default: Date.now,
+  },
+  user: {
+    _id: mongoose.Types.ObjectId,
+    username: String,
   },
 });
 

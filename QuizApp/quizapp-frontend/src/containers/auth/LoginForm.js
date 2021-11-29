@@ -53,7 +53,7 @@ const LoginForm = ({ history }) => {
 
   useEffect(() => {
     if (user) {
-      history.push('/');
+      history.push(`/@${user.username}`);
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
