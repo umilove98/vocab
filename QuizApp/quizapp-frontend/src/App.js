@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import ListPage from './pages/ListPage';
 import ProfileEditPage from './pages/ProfileEditPage';
 import VocabPage from './pages/VocabPage';
+import WritePage from './pages/WritePage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/register" component={RegisterPage} />
       <Route path="/profileEdit" component={ProfileEditPage} />
       <Route path="/@:username/:vocabId" component={VocabPage} />
+      <Route path="/write" component={WritePage} />
     </>
   );
 }

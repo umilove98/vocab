@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
+import Card from '../common/Card';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
+import Words from '../common/Words';
 
 const VocabViewerBlock = styled(Responsive)`
   margin-top: 4rem;
@@ -38,7 +40,7 @@ const VocabViewer = ({ vocab, error, loading, actionButtons }) => {
     return null;
   }
 
-  const { title, user, publishedDate, tags } = vocab;
+  const { title, user, publishedDate, tags, explanation, words } = vocab;
   return (
     <VocabViewerBlock>
       <VocabHead>
@@ -49,8 +51,10 @@ const VocabViewer = ({ vocab, error, loading, actionButtons }) => {
           hasMarginTop
         />
         <Tags tags={tags} />
+        <p>{explanation}</p>
       </VocabHead>
       {actionButtons}
+      <Words words={words} />
     </VocabViewerBlock>
   );
 };

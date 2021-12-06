@@ -28,7 +28,7 @@ const ActionButton = styled.button`
   }
 `;
 
-const VocabActionButtons = ({ onRemove }) => {
+const VocabActionButtons = ({ onEdit, onRemove }) => {
   const [modal, setModal] = useState(false);
   const onRemoveClick = () => {
     setModal(true);
@@ -44,7 +44,7 @@ const VocabActionButtons = ({ onRemove }) => {
   return (
     <>
       <VocabActionButtonsBlock>
-        <ActionButton>수정</ActionButton>
+        <ActionButton onClick={onEdit}>수정</ActionButton>
         <ActionButton onClick={onRemoveClick}>삭제</ActionButton>
       </VocabActionButtonsBlock>
       <AskRemoveModal

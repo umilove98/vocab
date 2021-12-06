@@ -5,6 +5,7 @@ import { readVocab, unloadVocab } from '../../modules/vocab';
 import VocabViewer from '../../components/vocabs/VocabViewer';
 import VocabActionButtons from '../../components/vocabs/VocabActionButtons';
 import { removeVocab } from '../../lib/api/vocabs';
+import { setOriginalVocab } from '../../modules/write';
 
 const VocabViewerContainer = ({ match, history }) => {
   // 처음 마운트될 때 포스트 읽기 API 요청
@@ -27,6 +28,11 @@ const VocabViewerContainer = ({ match, history }) => {
     };
   }, [dispatch, vocabId]);
 
+  const onEdit = () => {
+    dispatch(setOriginalVocab(vocab));
+    history.push('/write');
+  };
+
   const onRemove = async () => {
     try {
       await removeVocab(vocabId);
@@ -43,7 +49,9 @@ const VocabViewerContainer = ({ match, history }) => {
       vocab={vocab}
       loading={loading}
       error={error}
-      actionButtons={ownVocab && <VocabActionButtons onRemove={onRemove} />}
+      actionButtons={
+        ownVocab && <VocabActionButtons onEdit={onEdit} onRemove={onRemove} />
+      }
     />
   );
 };

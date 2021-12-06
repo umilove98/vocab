@@ -5,17 +5,19 @@ import loading from './loading';
 import user, { userSaga } from './user';
 import vocab, { vocabSaga } from './vocab';
 import vocabs, { vocabsSaga } from './vocabs';
+import write, { writeSaga } from './write';
 
 const rootReducer = combineReducers({
   auth,
   loading,
   user,
+  write,
   vocab,
   vocabs,
 });
 
 export function* rootSaga() {
-  yield all([authSaga(), userSaga(), vocabSaga(), vocabsSaga()]);
+  yield all([authSaga(), userSaga(), writeSaga(), vocabSaga(), vocabsSaga()]);
 }
 
 export default rootReducer;
