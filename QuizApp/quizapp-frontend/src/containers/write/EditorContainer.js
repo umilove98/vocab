@@ -6,7 +6,7 @@ import InputWord from '../../components/common/InputWord';
 
 const EditorContainer = () => {
   const dispatch = useDispatch();
-  const { title, explanation, words } = useSelector(({ write }) => ({
+  let { title, explanation, words } = useSelector(({ write }) => ({
     title: write.title,
     explanation: write.explanation,
     words: write.words,
@@ -29,7 +29,7 @@ const EditorContainer = () => {
         title={title}
         explanation={explanation}
       />
-      <InputWord words={words} />
+      <InputWord words={words} onChangeField={onChangeField} />
     </>
   );
 };

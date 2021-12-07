@@ -15,4 +15,12 @@ export const listVocabs = ({ page, username, tag }) => {
   return client.get(`/api/vocabs?${queryString}`);
 };
 
+export const updateVocab = ({ id, title, explanation, words, tags }) =>
+  client.patch(`/api/posts/${id}`, {
+    title,
+    explanation,
+    words,
+    tags,
+  });
+
 export const removeVocab = (id) => client.delete(`/api/vocabs/${id}`);

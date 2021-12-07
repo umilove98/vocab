@@ -16,13 +16,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InputWord = () => {
+const InputWord = ({ onChangeField }) => {
   const classes = useStyles();
   const [words, setWords] = useState([{ word: '', definition: '' }]);
 
   const handleChangeInput = (index, event) => {
     const values = [...words];
     values[index][event.target.name] = event.target.value;
+    onChangeField({ key: 'words', value: values });
     setWords(values);
   };
   const handleSubmit = (e) => {

@@ -2,23 +2,36 @@ import React, { useEffect } from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { writeVocab } from '../../modules/write';
+import { writeVocab, updateVocab } from '../../modules/write';
 
 const WriteActionButtonsContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { title, explanation, words, tags, vocab, vocabError } = useSelector(
-    ({ write }) => ({
-      title: write.title,
-      explanation: write.explanation,
-      words: write.words,
-      tags: write.tags,
-      vocab: write.vocab,
-      vocabError: write.vocabError,
-    }),
-  );
+  const {
+    title,
+    explanation,
+    words,
+    tags,
+    vocab,
+    vocabError,
+    originalVocabId,
+  } = useSelector(({ write }) => ({
+    title: write.title,
+    explanation: write.explanation,
+    words: write.words,
+    tags: write.tags,
+    vocab: write.vocab,
+    vocabError: write.vocabError,
+    originalVocabId: write.originalVocabId,
+  }));
 
   // 학습세트 등록
   const onPublish = () => {
+    if (originalVocabId) {
+      dispatch(
+        updateVocab({ title, explanation, words, tags, id: originalVocabId }),
+      );
+      return;
+    }
     dispatch(
       writeVocab({
         title,
@@ -44,7 +57,13 @@ const WriteActionButtonsContainer = ({ history }) => {
       console.log(vocabError);
     }
   }, [history, vocab, vocabError]);
-  return <WriteActionButtons onPublish={onPublish} onCancel={onCancel} />;
+  return (
+    <WriteActionButtons
+      onPublish={onPublish}
+      onCancel={onCancel}
+      isEdit={!!originalVocabId}
+    />
+  );
 };
 
 export default withRouter(WriteActionButtonsContainer);

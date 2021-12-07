@@ -16,11 +16,11 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const WriteActionButtons = ({ onCancel, onPublish }) => {
+const WriteActionButtons = ({ onCancel, onPublish, isEdit }) => {
   return (
     <WriteActionButtonBlock>
       <StyledButton cyan onClick={onPublish}>
-        학습세트 생성
+        학습세트 {isEdit ? '수정' : '등록'}
       </StyledButton>
       <StyledButton onClick={onCancel}>취소</StyledButton>
     </WriteActionButtonBlock>
