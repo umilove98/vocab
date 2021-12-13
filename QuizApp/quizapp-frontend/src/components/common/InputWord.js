@@ -6,6 +6,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 
 import { makeStyles } from '@material-ui/core/styles';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,44 +18,48 @@ const useStyles = makeStyles((theme) => ({
 
 const InputWord = ({ words, onChangeField }) => {
   const classes = useStyles();
-  // const [words, setWords] = useState([{ word: '', definition: '' }]);
+  const [inputs, setInputs] = useState([{ word: '', definition: '' }]);
 
   const handleChangeInput = (index, event) => {
-    const values = [...words];
+    const values = [...inputs];
     values[index][event.target.name] = event.target.value;
-    onChangeField({ key: 'words', value: values });
-    //   setWords(values);
+    onChangeField({ key: 'inputs', value: values });
+    setInputs(values);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   const handleAddFields = () => {
-    //  setWords([...words, { word: '', definition: '' }]);
+    setInputs([...inputs, { word: '', definition: '' }]);
   };
 
   const handleRemoveFields = (index) => {
-    const values = [...words];
+    const values = [...inputs];
     values.splice(index, 1);
-    //  setWords(values);
+    setInputs(values);
   };
+
+  useEffect(() => {
+    setInputs(words);
+  });
   return (
     <Container>
-      <form className={classes.root} onSubmit={handleSubmit} words={words}>
-        {words.map((words, index) => (
+      <form className={classes.root} onSubmit={handleSubmit} inputs={inputs}>
+        {inputs.map((inputs, index) => (
           <div key={index}>
             <TextField
               name="word"
               label="word"
               variant="filled"
-              value={words.word}
+              value={inputs.word}
               onChange={(event) => handleChangeInput(index, event)}
             />
             <TextField
               name="definition"
               label="definition"
               variant="filled"
-              value={words.definition}
+              value={inputs.definition}
               onChange={(event) => handleChangeInput(index, event)}
             />
             <IconButton onClick={() => handleRemoveFields(index)}>
