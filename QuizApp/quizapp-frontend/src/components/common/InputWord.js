@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,28 +15,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InputWord = ({ onChangeField }) => {
+const InputWord = ({ words, onChangeField }) => {
   const classes = useStyles();
-  const [words, setWords] = useState([{ word: '', definition: '' }]);
+  // const [words, setWords] = useState([{ word: '', definition: '' }]);
 
   const handleChangeInput = (index, event) => {
     const values = [...words];
     values[index][event.target.name] = event.target.value;
     onChangeField({ key: 'words', value: values });
-    setWords(values);
+    //   setWords(values);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   const handleAddFields = () => {
-    setWords([...words, { word: '', definition: '' }]);
+    //  setWords([...words, { word: '', definition: '' }]);
   };
 
   const handleRemoveFields = (index) => {
     const values = [...words];
     values.splice(index, 1);
-    setWords(values);
+    //  setWords(values);
   };
   return (
     <Container>
