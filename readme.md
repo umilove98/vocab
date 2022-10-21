@@ -13,7 +13,7 @@
 <img width="80%" src="./images/main.png"/>
 <br>
 ## create
-<img width="80%" src="./images/write.png"/>
+<img width="80%" src="./images/write vocab.png"/>
 <br>
 ## read
 <img width="80%" src="./images/read vocab.png"/>
